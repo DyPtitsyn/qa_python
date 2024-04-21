@@ -1,5 +1,10 @@
 import pytest
+from main import BooksCollector
 
+
+@pytest.fixture
+def books_collector():
+    return BooksCollector()
 
 class TestBooksCollector:
 
@@ -16,7 +21,7 @@ class TestBooksCollector:
     def test_add_new_book_already_exists(self, books_collector, book_name):
         books_collector.add_new_book(book_name)
         books_collector.add_new_book(book_name)
-        assert list(books_collector.get_books_genre().keys()) == [book_name]
+        assert len(books_collector.get_books_genre()) == 1
 
     def test_set_book_genre_add_genre_books(self, books_collector, book_name):
         genre = "Фантастика"
